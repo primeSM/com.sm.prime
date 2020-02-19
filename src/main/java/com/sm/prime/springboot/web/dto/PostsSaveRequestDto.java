@@ -14,6 +14,7 @@ public class PostsSaveRequestDto {
     private String content;
     private String author;
 
+
     @Builder
     public PostsSaveRequestDto(String title, String content, String author) {
         this.title = title;
@@ -21,7 +22,7 @@ public class PostsSaveRequestDto {
         this.author = author;
     }
 
-    public Posts toEntity() {
+    public Posts toEntity(String author) {
         return Posts.builder()
                 .title(title)
                 .content(content)
