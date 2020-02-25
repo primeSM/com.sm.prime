@@ -36,7 +36,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-oauth2-client')
     compile('org.springframework.session:spring-session-jdbc')
     compile('org.springframework.boot:spring-boot-devtools')
-    compile('org.maradb.jdbc:mariadb-java-client')
+    compile('org.mariadb.jdbc:mariadb-java-client')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.assertj:assertj-core:3.6.2')
 }
