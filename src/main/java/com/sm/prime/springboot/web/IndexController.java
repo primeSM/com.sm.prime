@@ -3,9 +3,12 @@ package com.sm.prime.springboot.web;
 
 import com.sm.prime.springboot.config.auth.LoginUser;
 import com.sm.prime.springboot.config.auth.dto.SessionUser;
+import com.sm.prime.springboot.domain.posts.Posts;
 import com.sm.prime.springboot.service.posts.PostsService;
 import com.sm.prime.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +24,10 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user) { // Model : 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장 가능
-        model.addAttribute("posts", postsService.findAllDesc());
+    public String index(Pageable pageable, Model model, @LoginUser SessionUser user) { // Model : 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장 가능
+        Page<Posts> postsPage = postsService.findAll(pageable);
+        model.addAttribute("posts", postsPage);
+
         if( user != null ) {
             model.addAttribute("Name", user.getName());
         }
@@ -64,5 +69,6 @@ public class IndexController {
             return "posts-update";
         }
     }
+
 
 }

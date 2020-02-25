@@ -42,4 +42,5 @@ public class PostsApiController {
         postsService.delete(id);
         return id;
     }
+
 }

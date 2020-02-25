@@ -7,6 +7,8 @@ import com.sm.prime.springboot.web.dto.PostsResponseDto;
 import com.sm.prime.springboot.web.dto.PostsSaveRequestDto;
 import com.sm.prime.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,6 +51,10 @@ public class PostsService {
     public void delete (Long id) {
         Posts posts = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글 없셈. id=" + id));
         postsRepository.delete(posts);
+    }
+    @Transactional(readOnly = true)
+    public Page<Posts> findAll(Pageable pageable) {
+        return postsRepository.findAll(pageable);
     }
 
 }
