@@ -18,10 +18,7 @@ cache:
 script: "./gradlew clean build"
 
 # CI 실행 완료 시 메일로 알람
-notifications:
-  email:
-    recipients:
-      - sumin4700@gmail.com
+
 
 before_deploy:
   - zip -r springboot2-webservice *
@@ -47,5 +44,10 @@ deploy:
     bundle_type: zip
     application: springboot2-webservice
     deployment_group: springboot2-webservice-group
-    region: ap-notheast-2
+    region: ap-northeast-2
     wait-until-deployed: true
+
+notifications:
+  email:
+    recipients:
+      - sumin4700@gmail.com
