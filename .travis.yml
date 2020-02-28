@@ -24,9 +24,9 @@ notifications:
       - sumin4700@gmail.com
 
 before_deploy:
-  - zip -r primesm-springboot2-webservice *
+  - zip -r springboot2-webservice *
   - mkdir -p deploy
-  - mv primesm-springboot2-webservice.zip deploy/primesm-springboot2-webservice.zip
+  - mv springboot2-webservice.zip deploy/springboot2-webservice.zip
 
 deploy:
   - provider: s3
@@ -43,9 +43,9 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: primesm-springboot-build
-    key: primesm-springboot2-webservice.zip
+    key: springboot2-webservice.zip
     bundle_type: zip
-    application: primesm-springboot2-webservice
-    deployment_group: primesm-springboot2-webservice-group
+    application: springboot2-webservice
+    deployment_group: springboot2-webservice-group
     region: ap-notheast-2
     wait-until-deployed: true
