@@ -23,8 +23,12 @@ public class PostsApiController {
         return postsService.save(requestDto, Author);
     }
 
-    @PutMapping("/api/v1/posts/update")
-    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
+    @PutMapping("/api/v1/posts/{id}")
+    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto, @LoginUser SessionUser user) {
+        PostsResponseDto dto = postsService.findById(id);
+        if(!dto.getAuthor().equals(user.getName())){
+            return null;
+        }
         return postsService.update(id, requestDto);
     }
 
@@ -33,11 +37,11 @@ public class PostsApiController {
         return postsService.findById(id);
     }
 
-    @DeleteMapping("/api/v1/posts/delete")
+    @DeleteMapping("/api/v1/posts/{id}")
     public Long delete(@PathVariable Long id, @LoginUser SessionUser user) {
         PostsResponseDto dto = postsService.findById(id);
         if(!dto.getAuthor().equals(user.getName())){
-            return id;
+            return null;
         }
         postsService.delete(id);
         return id;
