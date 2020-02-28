@@ -45,7 +45,7 @@ deploy:
     bucket: primesm-springboot-build
     key: primesm-springboot2-webservice.zip
     bundle_type: zip
-    application: springboot2-webservice
+    application: primesm-springboot2-webservice
     deployment_group: primesm-springboot2-webservice-group
     region: ap-notheast-2
     wait-until-deployed: true
